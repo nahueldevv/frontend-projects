@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nahueldev's Portfolio, Frontend Developer"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Nahuel Diaz | Frontend Developer</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-container">
+        <a href="#" class="logo">Nahuel<span class="dot">.</span></a>
+
+        <button
+          class="mobile-toggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <nav class="site-navbar">
+          <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+              <button class="theme-toggle" aria-label="Cambiar tema">
+                <svg class="icon-sun" width="24" height="24">
+                  <use href="./assets/sprite.svg#icon-sun"></use>
+                </svg>
+
+                <svg class="icon-moon" width="24" height="24">
+                  <use href="./assets/sprite.svg#icon-moon"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-container">
+          <div class="hero-content">
+            <span class="hero-badge">Hello, It's Me</span>
+            <h1 class="hero-title">Nahuel Diaz</h1>
+            <h2 class="hero-subtitle">
+              And I'm a <span class="highlight">Frontend Developer</span>
+            </h2>
+            <p class="hero-description">
+              I create fast and visually stunning web experiences. I specialize
+              in translating complex designs into clean, functional code.
+            </p>
+
+            <div class="social-links">
+              <a href="#" aria-label="Instagram">
+                <svg class="icon" width="24" height="24">
+                  <use href="./assets/sprite.svg#instagram"></use>
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <svg class="icon" width="24" height="24">
+                  <use href="./assets/sprite.svg#linkedin"></use>
+                </svg>
+              </a>
+              <a href="#" aria-label="GitHub">
+                <svg class="icon" width="24" height="24">
+                  <use href="./assets/sprite.svg#github"></use>
+                </svg>
+              </a>
+            </div>
+
+            <a href="#" class="btn btn-primary">Download CV</a>
+          </div>
+
+          <div class="hero-image-wrapper">
+            <div class="hero-image">
+              <img src="./assets/avatar.png" alt="Nahuel Diaz" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const themeBtn = document.querySelector(".theme-toggle");
+      const body = document.body;
+      const mobileToggle = document.querySelector(".mobile-toggle");
+      const navLinks = document.querySelector(".site-navbar");
+
+      const currentTheme = localStorage.getItem("theme");
+
+      if (currentTheme === "light") {
+        body.classList.add("light-mode");
+      }
+
+      themeBtn.addEventListener("click", () => {
+        body.classList.toggle("light-mode");
+
+        let theme = "dark";
+        if (body.classList.contains("light-mode")) {
+          theme = "light";
+        }
+        localStorage.setItem("theme", theme);
+      });
+
+      mobileToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        mobileToggle.classList.toggle("is-open");
+
+        const isOpen = navLinks.classList.contains("active");
+        mobileToggle.setAttribute("aria-expanded", isOpen);
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          mobileToggle.classList.remove("is-open");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | Pagination Practice</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-light: #ffffff;
+        --primary: #2e616b;
+        --primary-hover: #234b53;
+        --text-main: #111;
+        --text-secondary: #666;
+        --border-color: #e5e7eb;
+        --bg-icon: #f3f4f6; /* Fondo gris suave para los iconos */
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.2s;
+      }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        font-family: "Manrope", sans-serif;
+        color: var(--text-main);
+        background-color: var(--bg-light);
+      }
+
+      .site-header {
+        padding: 1.5em 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.1em;
+      }
+      .logo svg {
+        color: var(--primary);
+      }
+
+      .main-nav {
+        display: none;
+        gap: 2em;
+        font-weight: 500;
+        font-size: 0.95em;
+      }
+      @media (min-width >= 768px) {
+        .main-nav {
+          display: flex;
+        }
+      }
+
+      .main-nav a:hover,
+      .main-nav a.active {
+        color: var(--primary);
+      }
+      .main-nav a.active {
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: var(--bg-icon);
+        display: grid;
+        place-items: center;
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 0.8em;
+      }
+
+      main {
+        flex: 1;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 4em 1.5em;
+      }
+
+      .page-header {
+        margin-bottom: 3em;
+      }
+      .page-title {
+        font-size: 2.5em;
+        margin-bottom: 0.2em;
+        letter-spacing: -0.5px;
+      }
+      .page-subtitle {
+        color: var(--text-secondary);
+        max-width: 600px;
+        line-height: 1.5;
+      }
+
+      .project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em; /* Espacio entre tarjetas */
+      }
+
+      .project-card {
+        display: flex;
+        align-items: center;
+        padding: 1.5em;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        background-color: white;
+        gap: 1.5em;
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+      }
+
+      .project-card:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        border-color: #d1d5db;
+        transform: translateY(-2px);
+      }
+
+      .card-icon-box {
+        width: 60px;
+        height: 60px;
+        background-color: var(--bg-icon);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        color: var(--primary);
+      }
+
+      .card-content {
+        flex: 1;
+      }
+
+      .card-title {
+        font-size: 1.1em;
+        font-weight: 700;
+        margin-bottom: 0.3em;
+      }
+      .card-desc {
+        font-size: 0.9em;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+
+      .btn-details {
+        padding: 0.6em 1.2em;
+        background-color: var(--bg-icon);
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 0.85em;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        white-space: nowrap;
+      }
+
+      .btn-details:hover {
+        background-color: #e5e7eb;
+        color: var(--primary);
+      }
+
+      @media (max-width: 600px) {
+        .project-card {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1em;
+        }
+        .card-icon-box {
+          width: 50px;
+          height: 50px;
+        }
+        .card-content {
+          width: 100%;
+        }
+        .btn-details {
+          width: 100%;
+          text-align: center;
+          margin-top: 0.5em;
+        }
+      }
+
+      .pagination-container {
+        margin-top: 4em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+      }
+
+      .pagination {
+        display: flex;
+        gap: 0.5em;
+      }
+
+      .page-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: 500;
+        color: var(--text-main);
+        background-color: transparent;
+      }
+
+      .page-link:hover {
+        background-color: var(--bg-icon);
+      }
+
+      .page-link.active {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .pagination-info {
+        font-size: 0.75em;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      .site-footer {
+        padding: 2em 5%;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1.5em;
+        font-size: 0.8em;
+        color: var(--text-secondary);
+      }
+      @media (width >= 768px) {
+        .site-footer {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+      .footer-links {
+        display: flex;
+        gap: 2em;
+      }
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="index.html" class="logo">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        Minimalist Practice
+      </a>
+
+      <nav class="main-nav">
+        <a href="./index.html">Home</a>
+        <a href="./articles.html">Articles</a>
+        <a href="./projects.html" class="active">Projects</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="avatar">JD</div>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <h1 class="page-title">Project Directory</h1>
+        <p class="page-subtitle">
+          Explore our curated collection of open-source initiatives. This
+          interface is designed to demonstrate efficient data pagination.
+        </p>
+      </section>
+
+      <section class="project-list">
+        <article class="project-card">
+          <div class="card-icon-box">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Project Alpha</h3>
+            <p class="card-desc">
+              A sophisticated web-based task management tool built for
+              high-velocity startup teams.
+            </p>
+          </div>
+          <button class="btn-details">View Details</button>
+        </article>
+
+        <article class="project-card">
+          <div class="card-icon-box">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Project Beta</h3>
+            <p class="card-desc">
+              Real-time weather monitoring system leveraging hyper-local
+              atmospheric sensor data.
+            </p>
+          </div>
+          <button class="btn-details">View Details</button>
+        </article>
+
+        <article class="project-card">
+          <div class="card-icon-box">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+              ></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Project Gamma</h3>
+            <p class="card-desc">
+              Conversion-optimized landing page architecture for modern
+              e-commerce brands.
+            </p>
+          </div>
+          <button class="btn-details">View Details</button>
+        </article>
+
+        <article class="project-card">
+          <div class="card-icon-box">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Project Delta</h3>
+            <p class="card-desc">
+              Analytical dashboard for tracking carbon footprint across
+              industrial supply chains.
+            </p>
+          </div>
+          <button class="btn-details">View Details</button>
+        </article>
+
+        <article class="project-card">
+          <div class="card-icon-box">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Project Epsilon</h3>
+            <p class="card-desc">
+              Zero-trust security framework for decentralized peer-to-peer
+              communication.
+            </p>
+          </div>
+          <button class="btn-details">View Details</button>
+        </article>
+      </section>
+
+      <div class="pagination-container">
+        <nav class="pagination">
+          <a href="#" class="page-link" aria-label="Previous">&lt;</a>
+          <a href="#" class="page-link active">1</a>
+          <a href="#" class="page-link">2</a>
+          <a href="#" class="page-link">3</a>
+          <a href="#" class="page-link">4</a>
+          <span class="page-link">...</span>
+          <a href="#" class="page-link">12</a>
+          <a href="#" class="page-link" aria-label="Next">&gt;</a>
+        </nav>
+        <p class="pagination-info">Showing 1-5 of 60 projects</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2024 Minimalist Practice. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">GitHub</a>
+      </nav>
+    </footer>
+  </body>
+</html>

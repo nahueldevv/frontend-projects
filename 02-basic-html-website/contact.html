@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Pagination Practice</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-light: #ffffff;
+        --bg-input: #f8f9fa; /* Fondo suave para inputs */
+        --primary: #2e616b;
+        --primary-dark: #234b53;
+        --text-main: #111;
+        --text-secondary: #666;
+        --border-color: #e5e7eb;
+      }
+
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.2s;
+      }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        font-family: "Manrope", sans-serif;
+        color: var(--text-main);
+        background-color: var(--bg-light);
+      }
+
+      .site-header {
+        padding: 1.5em 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1em;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .logo svg {
+        color: var(--primary);
+      }
+
+      .main-nav {
+        display: none;
+        gap: 2em;
+        font-weight: 500;
+        font-size: 0.95em;
+      }
+
+      @media (width >= 768px) {
+        .main-nav {
+          display: flex;
+        }
+      }
+
+      .main-nav a:hover {
+        color: var(--primary);
+      }
+
+      .main-nav a.active {
+        text-decoration: underline;
+        text-underline-offset: 6px;
+        color: var(--primary);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.6em 1.5em;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9em;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(46, 97, 107, 0.2);
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4em 1em;
+        width: 100%;
+      }
+
+      .form-title {
+        font-size: 2.5em;
+        margin-bottom: 0.3em;
+        text-align: center;
+      }
+
+      .form-description {
+        color: var(--text-secondary);
+        margin-bottom: 3em;
+        text-align: center;
+        max-width: 400px;
+        line-height: 1.5;
+      }
+
+      form {
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        padding: 2.5em;
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        gap: 1.2em;
+        background-color: white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+      }
+
+      form label {
+        font-weight: 700;
+        font-size: 0.9em;
+        color: var(--text-main);
+        margin-bottom: -0.5em;
+      }
+
+      form input,
+      form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background-color: var(--bg-input);
+        font-family: inherit;
+        font-size: 0.95em;
+        color: var(--text-main);
+        transition: border-color 0.2s;
+      }
+
+      form input {
+        height: 48px; 
+      }
+
+      form textarea {
+        resize: none;
+        field-sizing: content;
+      }
+
+      form input:focus,
+      form textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        background-color: #fff;
+      }
+
+      form input::placeholder,
+      form textarea::placeholder {
+        color: #aaa;
+        font-weight: 400;
+      }
+
+      .btn-submit {
+        margin-top: 0.5em;
+        width: 100%;
+        padding: 14px;
+        font-size: 1em;
+      }
+
+      .helper-text {
+        margin-top: 2em;
+        font-size: 0.85em;
+        color: var(--text-secondary);
+        text-align: center;
+      }
+
+      .site-footer {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 5%;
+        border-top: 1px solid var(--border-color);
+        gap: 1.5em;
+        font-size: 0.85em;
+        color: var(--text-secondary);
+      }
+
+      @media (width >= 768px) {
+        .site-footer {
+          flex-direction: row;
+        }
+      }
+
+      .footer-nav {
+        display: flex;
+        gap: 1.5em;
+      }
+
+      .footer-nav a:hover {
+        color: var(--primary);
+      }
+
+      .copyright {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .footer-icon {
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="logo">
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+          <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+          <path d="M2 21v-6" />
+          <path d="M5 15v6" />
+          <path d="M2 18h3" />
+          <path d="M20 15v6h2" />
+        </svg>
+        Pagination Practice
+      </a>
+
+      <nav class="main-nav">
+        <a href="./index.html">Home</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./articles.html">Articles</a>
+        <a href="./contact.html" class="active" style="color: var(--primary); font-weight: 700; border-bottom: 2px solid var(--primary);">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#" class="btn btn-primary">Sign Up</a>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="form-title">Get in Touch</h1>
+      <p class="form-description">
+        Fill out the form below and we'll get back to you shortly.
+      </p>
+
+      <form action="#" method="POST">
+        <label for="name-input">Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          id="name-input" 
+          placeholder="Jane Doe" 
+          required 
+        />
+
+        <label for="email-input">Email Address</label>
+        <input 
+          type="email" 
+          name="email" 
+          id="email-input" 
+          placeholder="jane@example.com" 
+          required 
+        />
+
+        <label for="text-input">Your Message</label>
+        <textarea 
+          name="message" 
+          id="text-input" 
+          placeholder="How can we help you?"
+          required
+        ></textarea>
+
+        <button type="submit" class="btn btn-primary btn-submit">
+          Send Message &nbsp; &gt;
+        </button>
+      </form>
+
+      <p class="helper-text">Typically responds within 24 hours.</p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="copyright">
+        <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" /><path d="M5 15v6" /></svg>
+        <p>
+          &copy; 2024 Pagination Practice. Minimalist UI.
+        </p>
+      </div>
+      
+      <nav class="footer-nav">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </nav>
+    </footer>
+  </body>
+</html>

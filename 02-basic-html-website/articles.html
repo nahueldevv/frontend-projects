@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articles | Pagination Practice</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-light: #ffffff;
+        --primary: #2e616b;
+        --primary-hover: #234b53;
+        --text-main: #111;
+        --text-secondary: #666;
+        --border-color: #e5e7eb;
+        --bg-pagination: #f3f4f6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.2s;
+      }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        font-family: "Manrope", sans-serif;
+        color: var(--text-main);
+        background-color: var(--bg-light);
+      }
+
+      .site-header {
+        padding: 1.5em 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.1em;
+      }
+      .logo svg {
+        color: var(--primary);
+      }
+
+      .main-nav {
+        display: none;
+        gap: 2em;
+        font-weight: 500;
+        font-size: 0.95em;
+      }
+      @media (width >= 768px) {
+        .main-nav {
+          display: flex;
+        }
+      }
+
+      .main-nav a:hover,
+      .main-nav a.active {
+        color: var(--primary);
+      }
+      .main-nav a.active {
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
+
+      .btn {
+        padding: 0.6em 1.5em;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.9em;
+        background-color: var(--primary);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: var(--primary-hover);
+      }
+
+      main {
+        flex: 1;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 4em 1.5em;
+      }
+
+      .page-header {
+        margin-bottom: 3em;
+        position: relative;
+      }
+
+      .page-title {
+        font-size: 3em;
+        margin-bottom: 0.2em;
+        letter-spacing: -1px;
+      }
+      .page-subtitle {
+        color: var(--text-secondary);
+        max-width: 400px;
+      }
+
+      .page-count {
+        font-size: 0.75em;
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 1em;
+      }
+
+      @media (min-width >= 768px) {
+        .page-header {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+        }
+        .page-count {
+          margin-top: 0;
+          margin-bottom: 5px;
+        }
+      }
+
+      .article-list {
+        border-top: 1px solid var(--border-color);
+      }
+
+      .article-item {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 1.5em;
+        padding: 2.5em 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: background-color 0.2s;
+        cursor: pointer;
+      }
+
+      .article-item:hover .article-title {
+        color: var(--primary);
+      }
+      .article-item:hover .arrow-icon {
+        transform: translateX(5px);
+        color: var(--primary);
+      }
+
+      .article-number {
+        font-family: monospace;
+        font-size: 0.9em;
+        color: var(--text-secondary);
+        width: 30px;
+      }
+
+      .article-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+      }
+
+      .article-title {
+        font-size: 1.1em;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      .article-meta {
+        font-size: 0.9em;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+
+      .arrow-icon {
+        color: var(--text-main);
+        transition:
+          transform 0.2s,
+          color 0.2s;
+      }
+
+      @media (width <= 600px) {
+        .article-item {
+          grid-template-columns: 1fr auto;
+          gap: 0.5em;
+        }
+        .article-number {
+          display: none;
+        }
+        .article-content {
+          grid-column: 1 / -1;
+        }
+        .arrow-icon {
+          grid-column: 2;
+          grid-row: 1;
+        }
+      }
+
+      .pagination-container {
+        margin-top: 4em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+      }
+
+      .pagination {
+        display: flex;
+        gap: 0.5em;
+      }
+
+      .page-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: 500;
+        color: var(--text-main);
+        transition: all 0.2s;
+      }
+
+      .page-link:hover {
+        background-color: var(--bg-pagination);
+      }
+
+      .page-link.active {
+        background-color: var(--primary);
+        color: white;
+        font-weight: 600;
+      }
+
+      .page-info-text {
+        font-size: 0.8em;
+        color: var(--text-secondary);
+      }
+
+      .site-footer {
+        padding: 2em 5%;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 1.5em;
+        font-size: 0.8em;
+        color: var(--text-secondary);
+      }
+
+      @media (width >= 768px) {
+        .site-footer {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2em;
+      }
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+      .logo-footer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="index.html" class="logo">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        Minimalist Practice
+      </a>
+      <nav class="main-nav">
+        <a href="./index.html">Home</a>
+        <a href="./articles.html" class="active">Articles</a>
+        <a href="#">Projects</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+      <button class="btn">Subscribe</button>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <div>
+          <h1 class="page-title">Articles</h1>
+          <p class="page-subtitle">
+            Practice your navigation skills with our library.
+          </p>
+        </div>
+        <span class="page-count">Page 1 of 4</span>
+      </section>
+
+      <section class="article-list">
+        <article class="article-item">
+          <span class="article-number">01</span>
+          <div class="article-content">
+            <h2 class="article-title">
+              The Fundamentals of Minimalist UI Design
+            </h2>
+            <p class="article-meta">
+              October 24, 2023 — Exploring the core principles of Swiss design
+              in modern web interfaces.
+            </p>
+          </div>
+          <svg
+            class="arrow-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5l7 7-7 7" />
+          </svg>
+        </article>
+
+        <article class="article-item">
+          <span class="article-number">02</span>
+          <div class="article-content">
+            <h2 class="article-title">Mastering CSS Grid Layouts</h2>
+            <p class="article-meta">
+              October 15, 2023 — How to build complex, responsive grids without
+              the bloat of frameworks.
+            </p>
+          </div>
+          <svg
+            class="arrow-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5l7 7-7 7" />
+          </svg>
+        </article>
+
+        <article class="article-item">
+          <span class="article-number">03</span>
+          <div class="article-content">
+            <h2 class="article-title">Accessibility in Modern Web Apps</h2>
+            <p class="article-meta">
+              September 28, 2023 — Why building for everyone is the most
+              important skill in front-end development.
+            </p>
+          </div>
+          <svg
+            class="arrow-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5l7 7-7 7" />
+          </svg>
+        </article>
+
+        <article class="article-item">
+          <span class="article-number">04</span>
+          <div class="article-content">
+            <h2 class="article-title">Performance Budgets for Designers</h2>
+            <p class="article-meta">
+              September 12, 2023 — Learning to design within technical
+              constraints for faster user experiences.
+            </p>
+          </div>
+          <svg
+            class="arrow-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5l7 7-7 7" />
+          </svg>
+        </article>
+
+        <article class="article-item">
+          <span class="article-number">05</span>
+          <div class="article-content">
+            <h2 class="article-title">The Psychology of White Space</h2>
+            <p class="article-meta">
+              August 30, 2023 — How negative space guides user focus and reduces
+              cognitive load.
+            </p>
+          </div>
+          <svg
+            class="arrow-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5l7 7-7 7" />
+          </svg>
+        </article>
+      </section>
+
+      <div class="pagination-container">
+        <nav class="pagination">
+          <a href="#" class="page-link" aria-label="Previous">&lt;</a>
+          <a href="#" class="page-link active">1</a>
+          <a href="#" class="page-link">2</a>
+          <a href="#" class="page-link">3</a>
+          <span class="page-link">...</span>
+          <a href="#" class="page-link">8</a>
+          <a href="#" class="page-link" aria-label="Next">&gt;</a>
+        </nav>
+        <p class="page-info-text">Displaying 1-5 of 40 articles</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="logo-footer">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+        <span>Minimalist Practice &copy; 2024</span>
+      </div>
+      <nav class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">RSS Feed</a>
+      </nav>
+    </footer>
+  </body>
+</html>

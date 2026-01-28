@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A basic and simple website with navigation across pages"
+    />
+    <meta name="keywords" content="HTML, Frontend, Web Design, Structure" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>Minimalist Practice | Home</title>
+
+    <style>
+      :root {
+        --bg-light: #edf1fe;
+        --primary: #2e616b;
+        --primary-light: #e8f4f3;
+        --primary-text: #0009;
+      }
+
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      body {
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        font-family: "Manrope", sans-serif;
+      }
+
+      .site-header {
+        padding: 1em 2.5em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .main-nav {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1em;
+        font-weight: 600;
+      }
+
+      .logo svg {
+        color: var(--primary);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
+      }
+
+      .badge {
+        width: 200px;
+        background-color: var(--primary-light);
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.8em;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+
+      .hero-title {
+        font-size: 3em;
+      }
+
+      .hero-description {
+        color: var(--primary-text);
+        max-width: 520px;
+        margin-bottom: 2em;
+      }
+
+      .hero-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+      }
+
+      .btn {
+        background-color: var(--primary);
+        color: var(--bg-light);
+        border-radius: 8px;
+      }
+
+      .btn-primary {
+        padding: 0.3em 1em;
+        font-weight: 600;
+        font-size: 0.9em;
+      }
+
+      .btn-secondary,
+      .btn-outline {
+        padding: 0.5em 1.5em;
+        font-weight: 600;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary-light);
+        color: black;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        justify-content: center;
+        align-items: flex-start;
+        gap: 2em;
+        max-width: 1000px;
+        width: 90%;
+        margin-top: 5em;
+      }
+
+      .feature-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+
+      .feature-card p {
+        font-size: 12px;
+        color: var(--primary-text);
+      }
+
+      .feature-card svg {
+        color: var(--primary);
+      }
+
+      .site-footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem;
+        color: var(--primary);
+        border-top: 1px solid #0001;
+      }
+
+      .site-footer nav {
+        display: flex;
+        gap: 1em;
+      }
+
+      .highlight {
+        font-weight: 800;
+        font-style: italic;
+      }
+
+      a,
+      .btn,
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px); /* Se levanta un poco */
+        box-shadow: 0 4px 12px rgba(46, 97, 107, 0.2);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .main-nav a:hover,
+      .footer-nav a:hover {
+        color: var(--primary);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="logo">
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-html"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+          <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+          <path d="M2 21v-6" />
+          <path d="M5 15v6" />
+          <path d="M2 18h3" />
+          <path d="M20 15v6h2" />
+          <path d="M13 21v-6l2 3l2 -3v6" />
+          <path d="M7.5 15h3" />
+          <path d="M9 15v6" />
+        </svg>
+        Minimalist Practice
+      </a>
+
+      <nav class="main-nav">
+        <a href="./index.html">Home</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./articles.html">Articles</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#" class="btn btn-primary">Get Started</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="badge">Structure & Clarity</p>
+          <h1 class="hero-title">Refined Simplicity.</h1>
+          <p class="hero-description">
+            This platform serves as a focused environment for mastering web
+            structure and pagination. Designed for clarity, the interface
+            prioritizes content consumption over visual noise.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#" class="btn btn-secondary">View Projects &rightarrow;</a>
+            <a href="#" class="btn btn-outline">Read Articles</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <article class="feature-card">
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-files"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M15 3v4a1 1 0 0 0 1 1h4" />
+            <path
+              d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2"
+            />
+            <path
+              d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2"
+            />
+          </svg>
+
+          <h3>Structured</h3>
+          <p>
+            Semantic HTML and logical hierarchy are at the core of every project
+            layout.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-arrow-bar"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M14 12l-10 0" />
+            <path d="M14 12l-4 4" />
+            <path d="M14 12l-4 -4" />
+            <path d="M20 4l0 16" />
+          </svg>
+
+          <h3>Paginated</h3>
+          <p>
+            Master the flow of information across multiple views with modern
+            navigation logic.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-adjustments"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 8h4v4h-4l0 -4" />
+            <path d="M6 4l0 4" />
+            <path d="M6 12l0 8" />
+            <path d="M10 14h4v4h-4l0 -4" />
+            <path d="M12 4l0 10" />
+            <path d="M12 18l0 2" />
+            <path d="M16 5h4v4h-4l0 -4" />
+            <path d="M18 4l0 1" />
+            <path d="M18 9l0 11" />
+          </svg>
+
+          <h3>Accessible</h3>
+          <p>
+            Clean typography and high contrast ensure everyone can access the
+            content easily.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <nav class="footer-nav">
+        <a href="#">Home</a>
+        <a href="#">Projects</a>
+        <a href="#">Articles</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p class="copyright">
+        &copy; 2024 Minimalist Practice. Built with
+        <span class="highlight">Manrope</span> and Precision.
+      </p>
+    </footer>
+  </body>
+</html>
