@@ -11,7 +11,7 @@ This is roadmap.sh Frontend Projects Ideas and Solutions I have done!. You can s
 
 
 
-[demo-single-page-cv]: https://
-[demo-basic-html-website]: https://
-[demo-personal-portfolio]: https://
-[demo-changelog-component]: https://
+[demo-single-page-cv]: https://nahueldevv.github.io/frontend-projects/01-single-page-cv
+[demo-basic-html-website]: https://nahueldevv.github.io/frontend-projects/02-basic-html-website
+[demo-personal-portfolio]: https://nahueldevv.github.io/frontend-projects/03-personal-portfolio
+[demo-changelog-component]: https://nahueldevv.github.io/frontend-projects/04-changelog-component
