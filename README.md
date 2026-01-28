@@ -10,6 +10,7 @@ This is roadmap.sh Frontend Projects Ideas and Solutions I have done!. You can s
 | [Changelog Component][demo-changelog-component] |  |  |
 
 
+[Frontend Projects]: 
 [demo-single-page-cv]: https://nahueldevv.github.io/frontend-projects/01-single-page-cv
 [demo-basic-html-website]: https://nahueldevv.github.io/frontend-projects/02-basic-html-website
 [demo-personal-portfolio]: https://nahueldevv.github.io/frontend-projects/03-personal-portfolio
