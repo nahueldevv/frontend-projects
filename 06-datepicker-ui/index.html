@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datepicker UI</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="dark-mode">
+    <div class="datepicker-container">
+      <header class="datepicker-header">
+        <label for="date-input">Select Date</label>
+        <div class="input-wrapper">
+          <input type="text" id="date-input" value="21 / 12 / 2022" readonly />
+          <button type="button" class="icon-btn" aria-label="Abrir calendario">
+            <svg width="24" height="24">
+              <use href="./assets/sprite.svg#calendar"></use>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="calendar-card">
+        <div class="calendar-nav">
+          <button type="button" class="nav-btn" aria-label="Mes anterior">
+            &lt;
+          </button>
+          <span class="current-month"></span>
+          <button type="button" class="nav-btn" aria-label="Mes siguiente">
+            &gt;
+          </button>
+        </div>
+
+        <div class="calendar-grid">
+          <span class="day-name">S</span>
+          <span class="day-name">M</span>
+          <span class="day-name">T</span>
+          <span class="day-name">W</span>
+          <span class="day-name">T</span>
+          <span class="day-name">F</span>
+          <span class="day-name">S</span>
+        </div>
+
+        <footer class="calendar-footer">
+          <button type="button" class="text-btn">Today</button>
+          <button type="button" class="action-btn">Clear</button>
+        </footer>
+      </div>
+
+      <button
+        type="button"
+        class="theme-toggle"
+        aria-label="Cambiar tema"
+        onclick="document.body.classList.toggle('light-mode')"
+      >
+        <svg width="24" height="24">
+          <use href="./assets/sprite.svg#sun"></use>
+        </svg>
+        <svg width="24" height="24">
+          <use href="./assets/sprite.svg#moon"></use>
+        </svg>
+      </button>
+    </div>
+
+    <footer>&copy; 2026 Nahueldevv All rights reserved</footer>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

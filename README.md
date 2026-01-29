@@ -9,6 +9,7 @@ This is roadmap.sh Frontend Projects Ideas and Solutions I have done!. You can s
 | [Personal Portfolio][demo-personal-portfolio] [[ref]][ref-personal-portfolio] | | |
 | [Changelog Component][demo-changelog-component] [[ref]][ref-changelog-component] | | |
 | [Testimonial Cards][demo-testimonial-cards] [[ref]][ref-testimonial-cards] | | |
+| [Datepicker UI][demo-datepicker-ui] [[ref]][ref-datepicker-ui] | | |
 
 
 
@@ -28,3 +29,6 @@ This is roadmap.sh Frontend Projects Ideas and Solutions I have done!. You can s
 
 [demo-testimonial-cards]: https://nahueldevv.github.io/frontend-projects/05-testimonial-cards
 [ref-testimonial-cards]: https://roadmap.sh/projects/testimonial-cards
+
+[demo-datepicker-ui]: https://nahueldevv.github.io/frontend-projects/06-datepicker-ui
+[ref-datepicker-ui]: https://roadmap.sh/projects/datepicker-ui
