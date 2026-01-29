@@ -160,11 +160,12 @@ img {
     align-items: center;
     gap: 1.5rem;
 
-    .nav-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
+    a {
+      color: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
     }
 
     .avatar-group {
